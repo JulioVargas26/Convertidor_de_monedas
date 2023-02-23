@@ -1,4 +1,4 @@
-package app;
+package vista;
 
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
@@ -18,7 +18,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextArea;
 import java.awt.Font;
 
-public class Vista extends JFrame implements ActionListener {
+public class FrmConvertidor extends JFrame implements ActionListener {
 
     /**
     * 
@@ -38,7 +38,7 @@ public class Vista extends JFrame implements ActionListener {
 	EventQueue.invokeLater(new Runnable() {
 	    public void run() {
 		try {
-		    Vista frame = new Vista();
+		    FrmConvertidor frame = new FrmConvertidor();
 		    frame.setVisible(true);
 		} catch (Exception e) {
 		    e.printStackTrace();
@@ -50,7 +50,7 @@ public class Vista extends JFrame implements ActionListener {
     /**
      * Create the frame.
      */
-    public Vista() {
+    public FrmConvertidor() {
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	setBounds(100, 100, 325, 218);
 	contentPane = new JPanel();
