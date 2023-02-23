@@ -20,118 +20,188 @@ import java.awt.Font;
 
 public class FrmConvertidor extends JFrame implements ActionListener {
 
-    /**
-    * 
-    */
-    private static final long serialVersionUID = 1L;
-    private JPanel contentPane;
-    private JTextField txtDivisa;
-    private JButton btnConvertir;
-    private JButton btnCancelar;
-    private JComboBox<?> cboDivisa;
-    private static final DecimalFormat df = new DecimalFormat("0.00");
+	/**
+	* 
+	*/
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+	private JTextField txtDivisa;
+	private JButton btnConvertir;
+	private JButton btnCancelar;
+	private JComboBox<?> cboDivisa;
+	private static final DecimalFormat df = new DecimalFormat("0.00");
+	private JLabel lblNewLabel_2;
+	private JComboBox cboTipo;
+	private JLabel lblNewLabel_3;
+	private JLabel lblNewLabel_1;
+	private JButton btnLimpiar;
 
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-	EventQueue.invokeLater(new Runnable() {
-	    public void run() {
-		try {
-		    FrmConvertidor frame = new FrmConvertidor();
-		    frame.setVisible(true);
-		} catch (Exception e) {
-		    e.printStackTrace();
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					FrmConvertidor frame = new FrmConvertidor();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public FrmConvertidor() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 317, 246);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+
+		JLabel lblNewLabel = new JLabel("CONVERTIDOR DE DIVISAS");
+		lblNewLabel.setBounds(70, 11, 152, 14);
+		contentPane.add(lblNewLabel);
+
+		txtDivisa = new JTextField();
+		txtDivisa.setBounds(162, 134, 119, 20);
+		contentPane.add(txtDivisa);
+		txtDivisa.setColumns(10);
+
+		lblNewLabel_1 = new JLabel("Seleccione tipo : ");
+		lblNewLabel_1.setBounds(26, 105, 126, 14);
+		contentPane.add(lblNewLabel_1);
+
+		lblNewLabel_3 = new JLabel("Ingrese la cantidad : ");
+		lblNewLabel_3.setBounds(26, 137, 126, 14);
+		contentPane.add(lblNewLabel_3);
+
+		cboDivisa = new JComboBox();
+		cboDivisa.setModel(new DefaultComboBoxModel(new String[] { "Dolar", "Euro", "Yen" }));
+		cboDivisa.setBounds(163, 101, 118, 22);
+		contentPane.add(cboDivisa);
+
+		btnConvertir = new JButton("CONVERTIR");
+		btnConvertir.addActionListener(this);
+		btnConvertir.setBounds(27, 173, 118, 23);
+		contentPane.add(btnConvertir);
+
+		btnCancelar = new JButton("CANCELAR");
+		btnCancelar.addActionListener(this);
+		btnCancelar.setBounds(155, 173, 118, 23);
+		contentPane.add(btnCancelar);
+
+		lblNewLabel_2 = new JLabel("Seleccione tipo de Conversion : ");
+		lblNewLabel_2.setBounds(10, 56, 163, 18);
+		contentPane.add(lblNewLabel_2);
+
+		cboTipo = new JComboBox();
+		cboTipo.addActionListener(this);
+		cboTipo.setModel(new DefaultComboBoxModel(new String[] { "monedas", "longitud", "masa", "datos" }));
+		cboTipo.setBounds(163, 54, 118, 22);
+		contentPane.add(cboTipo);
+
+		btnLimpiar = new JButton("LIMPIAR");
+		btnLimpiar.setBounds(155, 173, 118, 23);
+		contentPane.add(btnLimpiar);
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == cboTipo) {
+			cboTipoActionPerformed(e);
 		}
-	    }
-	});
-    }
+		if (e.getSource() == btnConvertir) {
+			btnConvertirActionPerformed(e);
+		}
+		if (e.getSource() == btnCancelar) {
+			btnCancelarActionPerformed(e);
+		}
 
-    /**
-     * Create the frame.
-     */
-    public FrmConvertidor() {
-	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	setBounds(100, 100, 325, 218);
-	contentPane = new JPanel();
-	contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
-	setContentPane(contentPane);
-	contentPane.setLayout(null);
-
-	JLabel lblNewLabel = new JLabel("CONVERTIDOR DE DIVISAS");
-	lblNewLabel.setBounds(129, 11, 152, 14);
-	contentPane.add(lblNewLabel);
-
-	txtDivisa = new JTextField();
-	txtDivisa.setBounds(149, 103, 129, 20);
-	contentPane.add(txtDivisa);
-	txtDivisa.setColumns(10);
-
-	JLabel lblNewLabel_1 = new JLabel("Seleccione tipo : ");
-	lblNewLabel_1.setBounds(30, 54, 126, 14);
-	contentPane.add(lblNewLabel_1);
-
-	JLabel lblNewLabel_2 = new JLabel("Ingrese la cantidad : ");
-	lblNewLabel_2.setBounds(30, 106, 126, 14);
-	contentPane.add(lblNewLabel_2);
-
-	cboDivisa = new JComboBox();
-	cboDivisa.setModel(new DefaultComboBoxModel(new String[] { "Dolar", "Euro", "Yen" }));
-	cboDivisa.setBounds(149, 50, 118, 22);
-	contentPane.add(cboDivisa);
-
-	btnConvertir = new JButton("CONVERTIR");
-	btnConvertir.addActionListener(this);
-	btnConvertir.setBounds(31, 142, 118, 23);
-	contentPane.add(btnConvertir);
-
-	btnCancelar = new JButton("CANCELAR");
-	btnCancelar.addActionListener(this);
-	btnCancelar.setBounds(159, 142, 118, 23);
-	contentPane.add(btnCancelar);
-    }
-
-    public void actionPerformed(ActionEvent e) {
-	if (e.getSource() == btnConvertir) {
-	    btnConvertirActionPerformed(e);
+		if (e.getSource() == btnLimpiar) {
+			btnCancelarActionPerformed(e);
+		}
 	}
-	if (e.getSource() == btnCancelar) {
-	    btnCancelarActionPerformed(e);
+
+	protected void btnCancelarActionPerformed(ActionEvent e) {
+		cboTipo.setSelectedIndex(0);
 	}
-    }
 
-    protected void btnCancelarActionPerformed(ActionEvent e) {
-	txtDivisa.setText("");
-	cboDivisa.setSelectedIndex(0);
-    }
+	protected void cboTipoActionPerformed(ActionEvent e) {
+		switch (cboTipo.getSelectedIndex()) {
+		case 0:
+			lblNewLabel_1.setVisible(true);
+			txtDivisa.setVisible(true);
+			txtDivisa.setEnabled(true);
+			lblNewLabel_3.setVisible(true);
+			cboDivisa.setVisible(true);
+			btnCancelar.setVisible(true);
+			btnCancelar.setEnabled(true);
+			break;
 
-    protected void btnConvertirActionPerformed(ActionEvent e) {
+		case 1:
+			lblNewLabel_1.setVisible(false);
+			txtDivisa.setVisible(false);
+			txtDivisa.setEnabled(false);
+			lblNewLabel_3.setVisible(false);
+			cboDivisa.setVisible(false);
+			btnLimpiar.setVisible(false);
+			btnLimpiar.setEnabled(false);
+			btnCancelar.setVisible(true);
+			btnCancelar.setEnabled(true);
+			break;
+		default:
+			double yen = Double.parseDouble(txtDivisa.getText());
+			yen = yen * 0.029;
+			df.getDecimalFormatSymbols();
+			JOptionPane.showMessageDialog(null, yen);
+			break;
 
-	
-	switch (cboDivisa.getSelectedIndex()) {
-	case 0:
-	    double dolar = Double.parseDouble(txtDivisa.getText());
-	    dolar = dolar * 3.84;
-	    df.setRoundingMode(RoundingMode.DOWN);
-	    df.format(dolar);
-
-	    JOptionPane.showMessageDialog(null, dolar);
-	    break;
-	case 1:
-	    double euro = Double.parseDouble(txtDivisa.getText());
-	    euro = euro * 4.10;
-	    df.format(euro);
-	    df.setRoundingMode(RoundingMode.UP);
-	    JOptionPane.showMessageDialog(null, euro + " Euros");
-	    break;
-	default:
-	    double yen = Double.parseDouble(txtDivisa.getText());
-	    yen = yen * 0.029;
-	    df.getDecimalFormatSymbols();
-	    JOptionPane.showMessageDialog(null, yen);
-	    break;
+		}
 
 	}
-    }
+
+	protected void btnConvertirActionPerformed(ActionEvent e) {
+
+		switch (cboDivisa.getSelectedIndex()) {
+		case 0:
+			double dolar = Double.parseDouble(txtDivisa.getText());
+			dolar = dolar * 3.84;
+			df.setRoundingMode(RoundingMode.DOWN);
+			df.format(dolar);
+			btnLimpiar.setVisible(true);
+			btnLimpiar.setEnabled(true);
+			btnCancelar.setVisible(false);
+			btnCancelar.setEnabled(false);
+			JOptionPane.showMessageDialog(null, dolar);
+			break;
+		case 1:
+			double euro = Double.parseDouble(txtDivisa.getText());
+			euro = euro * 4.10;
+			df.format(euro);
+			df.setRoundingMode(RoundingMode.UP);
+			btnLimpiar.setVisible(false);
+			btnLimpiar.setEnabled(false);
+			btnCancelar.setVisible(true);
+			btnCancelar.setEnabled(true);
+			JOptionPane.showMessageDialog(null, euro + " Euros");
+			break;
+		default:
+			double yen = Double.parseDouble(txtDivisa.getText());
+			yen = yen * 0.029;
+			df.getDecimalFormatSymbols();
+			JOptionPane.showMessageDialog(null, yen);
+			break;
+
+		}
+	}
+
+	protected void btnLimpiarActionPerformed(ActionEvent e) {
+		txtDivisa.setText("");
+		cboDivisa.setSelectedIndex(0);
+	}
 }
