@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -13,23 +14,19 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JTextArea;
-import java.awt.Font;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
 public class FrmConvertidor extends JFrame implements ActionListener {
 
 	/**
 	* 
 	*/
-	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txtCantidad;
 	private JButton btnConvertir;
 	private JButton btnCancelar;
-	private JComboBox<?> cboMonedas;
+	private JComboBox cboMonedas;
 	private static final DecimalFormat df = new DecimalFormat("0.00");
 	private JLabel lblNewLabel_2;
 	private JComboBox cboTipo;
@@ -305,7 +302,7 @@ Metros a Kilometros
 			break;
 		default:
 			double kilometros = Double.parseDouble(txtCantidad.getText());
-			kilometros = kilometros * 0.029;
+			kilometros = kilometros / 1000;
 			df.getDecimalFormatSymbols();
 			JOptionPane.showMessageDialog(null, kilometros + " kilometros");
 			break;
@@ -352,30 +349,22 @@ Gigabyte a Terabyte
 			 */
 			case 0:
 				double kilobyte = Double.parseDouble(txtCantidad.getText());
-				kilobyte = kilobyte /1000;
-				df.setRoundingMode(RoundingMode.DOWN);
-				df.format(kilobyte);
+				kilobyte = kilobyte / 1000;
 				JOptionPane.showMessageDialog(null, kilobyte + " kilobyte");
 				break;
 			case 1:
 				double megabyte = Double.parseDouble(txtCantidad.getText());
 				megabyte = megabyte /1000;
-				df.format(megabyte);
-				df.setRoundingMode(RoundingMode.UP);
 				JOptionPane.showMessageDialog(null, megabyte + " megabyte");
 				break;
 			case 2:
 				double gigabyte = Double.parseDouble(txtCantidad.getText());
-				gigabyte = gigabyte / 4.1000;
-				df.format(gigabyte);
-				df.setRoundingMode(RoundingMode.UP);
+				gigabyte = gigabyte / 1000;
 				JOptionPane.showMessageDialog(null, gigabyte + " gigabyte");
 				break;
 			default:
 				double terabyte = Double.parseDouble(txtCantidad.getText());
-				terabyte = terabyte * 4.10;
-				df.format(terabyte);
-				df.setRoundingMode(RoundingMode.UP);
+				terabyte = terabyte / 1000;
 				JOptionPane.showMessageDialog(null, terabyte + " terabyte");
 				break;
 
